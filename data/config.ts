@@ -16,7 +16,7 @@ export const siteConfig: SiteConfig = {
   // 1. Open your Spotify playlist/track on desktop or mobile app.
   // 2. Click "..." -> "Share" -> "Embed playlist" (or copy link).
   // 3. Paste the URL below (e.g. "https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID" or "https://open.spotify.com/embed/track/YOUR_TRACK_ID")
-  spotifyEmbedUrl: "https://open.spotify.com/embed/playlist/1jcx3wCRRTtXmZhSFTtBzV?utm_source=generator&si=b8ad156239ff453e",
+  spotifyEmbedUrl: "https://open.spotify.com/embed/playlist/1jcx3wCRRTtXmZhSFTtBzV?utm_source=generator&si=d207fb55784b40af",
   
   // 🔴 YOUTUBE PLAYLIST OR VIDEO EMBED LINK (Optional):
   // e.g. "https://www.youtube.com/embed/videoseries?list=YOUR_PLAYLIST_ID" or "https://www.youtube.com/embed/YOUR_VIDEO_ID"
