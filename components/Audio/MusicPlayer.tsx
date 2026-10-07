@@ -20,7 +20,9 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
   useEffect(() => {
     if (musicType === "mp3" && audioRef.current) {
       if (isPlaying) {
-        audioRef.current.play().catch(() => {});
+        audioRef.current.play().catch((err) => {
+          console.warn("Autoplay blocked or waiting for user interaction:", err);
+        });
       } else {
         audioRef.current.pause();
       }
@@ -42,7 +44,7 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
     }
   };
 
-  // 🟢 SPOTIFY PLAYER WIDGET WITH AUTOPLAY FROM BEGINNING
+  // 🟢 SPOTIFY PLAYER WIDGET
   if (musicType === "spotify") {
     let embedUrl = siteConfig.spotifyEmbedUrl || "https://open.spotify.com/embed/playlist/1jcx3wCRRTtXmZhSFTtBzV";
 
@@ -61,7 +63,7 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
               animate={{ opacity: 1, scale: 1, y: 0 }}
               exit={{ opacity: 0, scale: 0.9, y: 20 }}
               transition={{ duration: 0.3 }}
-              className="w-[300px] sm:w-[350px] bg-[#121214] border border-[#1DB954]/40 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden"
+              className="w-[300px] sm:w-[350px] bg-[#121214] border border-[#1DB954]/50 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden"
             >
               <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/10 mb-2">
                 <span className="text-xs uppercase tracking-widest text-[#1DB954] font-semibold flex items-center gap-1.5 font-sans">
@@ -81,7 +83,7 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
                 height="152"
                 frameBorder="0"
                 allow="autoplay; clipboard-write; encrypted-media; fullscreen; picture-in-picture"
-                loading="lazy"
+                loading="eager"
                 className="rounded-xl"
               />
             </motion.div>

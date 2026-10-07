@@ -116,16 +116,16 @@ export default function MagazineViewer({ onOpenSecretNote }: MagazineViewerProps
   };
 
   return (
-    <section id="magazine" className="relative w-full min-h-screen py-16 px-2 sm:px-4 flex flex-col items-center justify-center bg-[#070708] overflow-hidden">
+    <section id="magazine" className="relative w-full min-h-screen pt-28 sm:pt-36 pb-16 px-2 sm:px-4 flex flex-col items-center justify-center bg-[#070708] overflow-hidden">
       {/* Background Ambience */}
       <div className="absolute inset-0 bg-radial from-stone-900/20 via-transparent to-transparent pointer-events-none" />
 
-      {/* Header Info */}
+      {/* Header Info with clear distance from Navbar */}
       <div className="text-center mb-6 max-w-xl px-4">
         <h2 className="font-serif-editorial text-2xl sm:text-4xl text-white font-light tracking-wide">
           {siteConfig.siteTitle}
         </h2>
-        <p className="text-white/50 text-xs sm:text-sm font-sans tracking-widest uppercase mt-1">
+        <p className="text-white/50 text-xs sm:text-sm font-sans tracking-widest uppercase mt-2">
           {isMobile ? "Swipe or tap edges to flip pages" : "Click, drag edges, or use arrow keys to flip"}
         </p>
       </div>

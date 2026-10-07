@@ -10,6 +10,7 @@ import MusicPlayer from "@/components/Audio/MusicPlayer";
 import EasterEggModal from "@/components/Surprises/EasterEggModal";
 import Footer from "@/components/UI/Footer";
 import FloatingFireflies from "@/components/UI/FloatingFireflies";
+import ClickSparkles from "@/components/UI/ClickSparkles";
 
 export default function Home() {
   const [isCoverOpen, setIsCoverOpen] = useState(true);
@@ -30,6 +31,9 @@ export default function Home() {
     <main className="min-h-screen bg-editorial-gradient text-white relative">
       {/* Floating Ambient Fireflies */}
       <FloatingFireflies />
+
+      {/* Interactive Click Sparkles / Hearts Burst */}
+      <ClickSparkles />
 
       {/* Navigation Bar */}
       <Navbar
