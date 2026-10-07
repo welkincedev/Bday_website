@@ -16,7 +16,7 @@ export const siteConfig: SiteConfig = {
   // 1. Open your Spotify playlist/track on desktop or mobile app.
   // 2. Click "..." -> "Share" -> "Embed playlist" (or copy link).
   // 3. Paste the URL below (e.g. "https://open.spotify.com/embed/playlist/YOUR_PLAYLIST_ID" or "https://open.spotify.com/embed/track/YOUR_TRACK_ID")
-  spotifyEmbedUrl: "https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M?utm_source=generator&theme=0",
+  spotifyEmbedUrl: "https://open.spotify.com/playlist/1jcx3wCRRTtXmZhSFTtBzV?si=FuS4kDEnTw-9fPbxoG_hOQ&utm_source=whatsapp&pi=vnXPGu7dSVyfx",
   
   // 🔴 YOUTUBE PLAYLIST OR VIDEO EMBED LINK (Optional):
   // e.g. "https://www.youtube.com/embed/videoseries?list=YOUR_PLAYLIST_ID" or "https://www.youtube.com/embed/YOUR_VIDEO_ID"
@@ -30,6 +30,6 @@ export const siteConfig: SiteConfig = {
   finalMessage: {
     heading: "Happy Birthday, My Love",
     body: "This digital magazine was created with endless love by the two people who adore you most. Every page holds a story, every photo holds a memory, and every line was written with you in mind. May this new chapter bring you as much magic and warmth as you give to the world every single day.",
-    closing: "Forever & Always,"
+    closing: "Forever & Always💖,"
   }
 };

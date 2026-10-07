@@ -4,19 +4,21 @@ import { siteConfig } from "./config";
 /**
  * 💌 SPECIAL LETTERS DATA STRUCTURE
  * ----------------------------------------------------
- * Edit the letter text paragraphs below.
- * They will be rendered in elegant editorial typography.
+ * Edit the letter text, passwords, and hints below.
+ * Case-insensitive passwords (e.g. "love" works for "LOVE" or "Love").
  */
 
 export const letters: LetterItem[] = [
   {
     id: "boyfriend",
     author: siteConfig.boyfriendName,
-    role: "From Your Love",
+    role: "From Your Boy",
     date: "Special Birthday Edition",
     title: "To the Girl Who Holds My Heart",
+    password: "love", // ✏️ CHANGE PASSWORD HERE for Boyfriend's Letter
+    passwordHint: "Hint: The secret word between us 💕", // ✏️ OPTIONAL HINT
     content: [
-      `Happy Birthday, Ponnamani!`,
+      `Happy Birthday, Kukkrurveyy!`,
       `Every single day with you feels like a gift. From the quiet mornings to our late-night talks, you bring a warmth and joy into my life that words can barely capture.`,
       `Watching you grow, chase your dreams, and illuminate every room you walk into is my absolute favorite thing. You have this rare, effortless grace and kindness that inspires everyone around you.`,
       `Thank you for being my anchor, my best friend, and my endless source of happiness. I hope this magazine brings a smile to your face today and serves as a reminder of how deeply you are cherished.`,
@@ -27,9 +29,11 @@ export const letters: LetterItem[] = [
   {
     id: "bestie",
     author: siteConfig.bestieName,
-    role: "From Your Bestie",
-    date: "Partner in Crime Edition",
+    role: "From Your Gurl",
+    date: "Special Birthday Edition",
     title: "To My Soul Sister & Ride or Die",
+    password: "bestie", // ✏️ CHANGE PASSWORD HERE for Bestie's Letter
+    passwordHint: "Hint: Who is your ride or die? 💖", // ✏️ OPTIONAL HINT
     content: [
       `Happy Birthday to my favorite person in the entire universe! 💖`,
       `Life would be so incredibly boring without you. From spontaneous late-night food runs to endless inside jokes that nobody else understands, you are the best friend anyone could ever ask for.`,

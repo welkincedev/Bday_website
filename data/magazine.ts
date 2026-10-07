@@ -10,7 +10,9 @@ import { MagazinePage } from "@/types";
  * - page-01.webp
  * - page-02.webp
  * - page-03.webp
- * ...
+ * - page-04.webp
+ * - page-05.webp
+ * - page-06.webp
  */
 
 export const magazinePages: MagazinePage[] = [
@@ -56,5 +58,13 @@ export const magazinePages: MagazinePage[] = [
     alt: "Page 5 - Looking Ahead",
     title: "Chapter 5: Future Dreams",
     caption: "Here is to many more chapters ahead."
+  },
+  {
+    id: 7,
+    image: "/images/magazine/page-06.webp",
+    alt: "Page 6 - Special Edition Page",
+    title: "Chapter 6: Forever Celebrations",
+    caption: "Celebrating you today and every day.",
+    hiddenNote: "You make every day brighter! 🌟"
   }
 ];

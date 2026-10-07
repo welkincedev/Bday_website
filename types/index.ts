@@ -8,15 +8,11 @@ export interface MagazinePage {
 }
 
 export interface MemoryItem {
-  id: string;
-  year: string;
-  date?: string;
   image: string;
-  title: string;
-  caption: string;
+  title?: string;
   location?: string;
   rotationDegrees?: number; // e.g. -2, 3, -1 for realistic polaroid tilt
-  note?: string; // Secret note revealed on tap/click
+  note?: string; // Optional secret note revealed on tap/click
 }
 
 export interface LetterItem {
@@ -27,6 +23,8 @@ export interface LetterItem {
   title: string;
   content: string[];
   signature: string;
+  password?: string; // Optional secret password to unlock this letter
+  passwordHint?: string; // Optional hint for the password
   avatar?: string;
 }
 
@@ -37,8 +35,8 @@ export interface SiteConfig {
   siteTitle: string;
   subTitle: string;
   musicType: 'spotify' | 'youtube' | 'mp3';
-  spotifyEmbedUrl?: string; // e.g. "https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
-  youtubeEmbedUrl?: string; // e.g. "https://www.youtube.com/embed/videoseries?list=PLAYLIST_ID" or "https://www.youtube.com/embed/VIDEO_ID"
+  spotifyEmbedUrl?: string;
+  youtubeEmbedUrl?: string;
   audioPath: string;
   songTitle: string;
   artistName: string;
