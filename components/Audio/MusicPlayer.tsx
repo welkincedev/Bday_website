@@ -2,7 +2,7 @@
 
 import { useState, useRef, useEffect } from "react";
 import { siteConfig } from "@/data/config";
-import { Play, Pause, Volume2, VolumeX, Music, X, ChevronUp, ChevronDown } from "lucide-react";
+import { Play, Pause, Volume2, VolumeX, Music, X } from "lucide-react";
 import { motion, AnimatePresence } from "framer-motion";
 
 interface MusicPlayerProps {
@@ -14,7 +14,6 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(0.7);
-  const [isExpanded, setIsExpanded] = useState(false);
 
   const musicType = siteConfig.musicType || "spotify";
 
@@ -43,9 +42,14 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
     }
   };
 
-  // 🟢 SPOTIFY PLAYER WIDGET
+  // 🟢 SPOTIFY PLAYER WIDGET WITH AUTOPLAY FROM BEGINNING
   if (musicType === "spotify") {
-    const embedUrl = siteConfig.spotifyEmbedUrl || "https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M";
+    let embedUrl = siteConfig.spotifyEmbedUrl || "https://open.spotify.com/embed/playlist/1jcx3wCRRTtXmZhSFTtBzV";
+
+    // Ensure embedUrl has autoplay parameter
+    if (!embedUrl.includes("autoplay=1")) {
+      embedUrl += embedUrl.includes("?") ? "&autoplay=1" : "?autoplay=1";
+    }
 
     return (
       <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">

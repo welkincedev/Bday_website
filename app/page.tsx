@@ -9,6 +9,7 @@ import LettersSection from "@/components/Letters/LettersSection";
 import MusicPlayer from "@/components/Audio/MusicPlayer";
 import EasterEggModal from "@/components/Surprises/EasterEggModal";
 import Footer from "@/components/UI/Footer";
+import FloatingFireflies from "@/components/UI/FloatingFireflies";
 
 export default function Home() {
   const [isCoverOpen, setIsCoverOpen] = useState(true);
@@ -27,6 +28,9 @@ export default function Home() {
 
   return (
     <main className="min-h-screen bg-editorial-gradient text-white relative">
+      {/* Floating Ambient Fireflies */}
+      <FloatingFireflies />
+
       {/* Navigation Bar */}
       <Navbar
         isPlayingMusic={isPlayingMusic}
