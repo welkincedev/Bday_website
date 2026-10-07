@@ -1,26 +1,79 @@
 @import "tailwindcss";
 
-:root {
-  --background: #ffffff;
-  --foreground: #171717;
-}
-
-@theme inline {
-  --color-background: var(--background);
-  --color-foreground: var(--foreground);
-  --font-sans: var(--font-geist-sans);
-  --font-mono: var(--font-geist-mono);
-}
-
-@media (prefers-color-scheme: dark) {
+@layer base {
   :root {
-    --background: #0a0a0a;
-    --foreground: #ededed;
+    --font-serif: 'Cormorant Garamond', Georgia, serif;
+    --font-sans: 'Inter', system-ui, sans-serif;
+    --font-handwriting: 'Caveat', cursive;
+  }
+  
+  body {
+    background-color: #0A0A0B;
+    color: #E5E3DF;
+    font-family: var(--font-sans);
   }
 }
 
-body {
-  background: var(--background);
-  color: var(--foreground);
-  font-family: Arial, Helvetica, sans-serif;
+.font-serif-editorial {
+  font-family: var(--font-serif);
+}
+
+.font-handwriting {
+  font-family: var(--font-handwriting);
+}
+
+/* Custom Luxury Scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: #0A0A0B;
+}
+::-webkit-scrollbar-thumb {
+  background: #2A2A2E;
+  border-radius: 3px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: #4A4A50;
+}
+
+/* Magazine 3D Page Flip Shadow & Realism */
+.stpageflip-container {
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+}
+
+/* Page flip drop shadow effect */
+.page-shadow-left {
+  background: linear-gradient(to right, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 70%, rgba(0,0,0,0) 100%);
+}
+
+.page-shadow-right {
+  background: linear-gradient(to left, rgba(0,0,0,0.3) 0%, rgba(0,0,0,0.05) 70%, rgba(0,0,0,0) 100%);
+}
+
+/* Polaroid Card Hover & 3D Flip */
+.perspective-1000 {
+  perspective: 1000px;
+}
+
+.transform-style-3d {
+  transform-style: preserve-3d;
+}
+
+.backface-hidden {
+  backface-visibility: hidden;
+}
+
+.rotate-y-180 {
+  transform: rotateY(180deg);
+}
+
+/* Custom glow and gold accent */
+.text-gold-accent {
+  color: #D4AF37;
+}
+
+.border-gold-accent {
+  border-color: rgba(212, 175, 55, 0.3);
 }
