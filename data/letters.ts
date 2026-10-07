@@ -16,7 +16,7 @@ export const letters: LetterItem[] = [
     date: "Special Birthday Edition",
     title: "To the Girl Who Holds My Heart",
     content: [
-      `Happy Birthday, my beautiful ${siteConfig.girlfriendName}!`,
+      `Happy Birthday, Ponnamani!`,
       `Every single day with you feels like a gift. From the quiet mornings to our late-night talks, you bring a warmth and joy into my life that words can barely capture.`,
       `Watching you grow, chase your dreams, and illuminate every room you walk into is my absolute favorite thing. You have this rare, effortless grace and kindness that inspires everyone around you.`,
       `Thank you for being my anchor, my best friend, and my endless source of happiness. I hope this magazine brings a smile to your face today and serves as a reminder of how deeply you are cherished.`,

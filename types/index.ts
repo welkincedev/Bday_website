@@ -36,6 +36,9 @@ export interface SiteConfig {
   bestieName: string;
   siteTitle: string;
   subTitle: string;
+  musicType: 'spotify' | 'youtube' | 'mp3';
+  spotifyEmbedUrl?: string; // e.g. "https://open.spotify.com/embed/playlist/37i9dQZF1DXcBWIGoYBM5M"
+  youtubeEmbedUrl?: string; // e.g. "https://www.youtube.com/embed/videoseries?list=PLAYLIST_ID" or "https://www.youtube.com/embed/VIDEO_ID"
   audioPath: string;
   songTitle: string;
   artistName: string;
