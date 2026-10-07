@@ -3,7 +3,6 @@
 import { useState, useRef, useEffect } from "react";
 import { siteConfig } from "@/data/config";
 import { Play, Pause, Volume2, VolumeX, Music, X } from "lucide-react";
-import { motion, AnimatePresence } from "framer-motion";
 
 interface MusicPlayerProps {
   isPlaying: boolean;
@@ -14,7 +13,6 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(0.7);
-  // Track if Spotify player iframe has been loaded at least once so it keeps playing in background
   const [hasActivated, setHasActivated] = useState(false);
 
   const musicType = siteConfig.musicType || "spotify";
@@ -52,17 +50,30 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
     }
   };
 
+  // Helper to safely format ANY Spotify URL into a valid embed URL
+  const formatSpotifyEmbedUrl = (rawUrl?: string): string => {
+    let url = rawUrl || "https://open.spotify.com/embed/playlist/1jcx3wCRRTtXmZhSFTtBzV";
+
+    // Ensure it uses /embed/ route
+    if (url.includes("open.spotify.com/") && !url.includes("open.spotify.com/embed/")) {
+      url = url.replace("open.spotify.com/", "open.spotify.com/embed/");
+    }
+
+    // Ensure autoplay=1 parameter is present
+    if (!url.includes("autoplay=1")) {
+      url += url.includes("?") ? "&autoplay=1" : "?autoplay=1";
+    }
+
+    return url;
+  };
+
   // 🟢 SPOTIFY PLAYER WIDGET WITH BACKGROUND CONTINUOUS PLAYBACK
   if (musicType === "spotify") {
-    let embedUrl = siteConfig.spotifyEmbedUrl || "https://open.spotify.com/embed/playlist/1jcx3wCRRTtXmZhSFTtBzV";
-
-    if (!embedUrl.includes("autoplay=1")) {
-      embedUrl += embedUrl.includes("?") ? "&autoplay=1" : "?autoplay=1";
-    }
+    const embedUrl = formatSpotifyEmbedUrl(siteConfig.spotifyEmbedUrl);
 
     return (
       <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
-        {/* Persistent Spotify Iframe Container (Keeps iframe mounted so audio never stops) */}
+        {/* Persistent Spotify Iframe Container */}
         {hasActivated && (
           <div
             className={`transition-all duration-300 transform ${
