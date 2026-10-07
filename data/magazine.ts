@@ -5,41 +5,33 @@ import { MagazinePage } from "@/types";
  * ----------------------------------------------------
  * Place your Canva exported WebP/PNG images into `public/images/magazine/`
  *
- * File Naming Recommendation:
- * - cover.webp
- * - page-01.webp
- * - page-02.webp
- * - page-03.webp
- * - page-04.webp
- * - page-05.webp
- * - page-06.webp
  */
 
 export const magazinePages: MagazinePage[] = [
   {
     id: 1,
-    image: "/images/magazine/cover.webp",
+    image: "/images/magazine/1.png",
     alt: "Magazine Cover",
     title: "Cover Issue",
     hiddenNote: "Welcome to your special birthday issue! ✨"
   },
   {
     id: 2,
-    image: "/images/magazine/page-01.webp",
+    image: "/images/magazine/4.png",
     alt: "Page 1 - Introduction",
     title: "Chapter 1: The Beginning",
     caption: "A look back at where it all started."
   },
   {
     id: 3,
-    image: "/images/magazine/page-02.webp",
+    image: "/images/magazine/3.png",
     alt: "Page 2 - Special Moments",
     title: "Chapter 2: Sweet Escape",
     caption: "Unforgettable journeys together."
   },
   {
     id: 4,
-    image: "/images/magazine/page-03.webp",
+    image: "/images/magazine/5.png",
     alt: "Page 3 - Bestie Chronicles",
     title: "Chapter 3: Partner in Crime",
     caption: "Laughter and secrets shared.",
@@ -47,21 +39,21 @@ export const magazinePages: MagazinePage[] = [
   },
   {
     id: 5,
-    image: "/images/magazine/page-04.webp",
+    image: "/images/magazine/6.png",
     alt: "Page 4 - The Little Things",
     title: "Chapter 4: Everyday Magic",
     caption: "It's the small moments that mean the most."
   },
   {
     id: 6,
-    image: "/images/magazine/page-05.webp",
+    image: "/images/magazine/7.png",
     alt: "Page 5 - Looking Ahead",
     title: "Chapter 5: Future Dreams",
     caption: "Here is to many more chapters ahead."
   },
   {
     id: 7,
-    image: "/images/magazine/page-06.webp",
+    image: "/images/magazine/2.png",
     alt: "Page 6 - Special Edition Page",
     title: "Chapter 6: Forever Celebrations",
     caption: "Celebrating you today and every day.",

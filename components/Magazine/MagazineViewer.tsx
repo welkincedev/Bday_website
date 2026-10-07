@@ -11,7 +11,6 @@ import {
   Maximize2,
   Minimize2,
   Sparkles,
-  Volume2,
   RotateCcw,
 } from "lucide-react";
 import confetti from "canvas-confetti";
@@ -23,8 +22,15 @@ interface MagazineViewerProps {
 export default function MagazineViewer({ onOpenSecretNote }: MagazineViewerProps) {
   const flipBookRef = useRef<any>(null);
   const [currentPage, setCurrentPage] = useState(0);
-  const [totalPages, setTotalPages] = useState(magazinePages.length);
+  const [totalPages] = useState(magazinePages.length);
   const [zoomPage, setZoomPage] = useState<string | null>(null);
+  const [pageImageSources, setPageImageSources] = useState<Record<number, string>>(() => {
+    const initial: Record<number, string> = {};
+    magazinePages.forEach((p) => {
+      initial[p.id] = p.image;
+    });
+    return initial;
+  });
   const [imageErrors, setImageErrors] = useState<Record<number, boolean>>({});
   const [isMobile, setIsMobile] = useState(false);
   const [isLoaded, setIsLoaded] = useState(false);
@@ -95,8 +101,18 @@ export default function MagazineViewer({ onOpenSecretNote }: MagazineViewerProps
     }
   };
 
-  const handleImageError = (pageId: number) => {
-    setImageErrors((prev) => ({ ...prev, [pageId]: true }));
+  const handlePageImageError = (pageId: number) => {
+    const currentSrc = pageImageSources[pageId] || "";
+
+    if (currentSrc.endsWith(".webp")) {
+      setPageImageSources((prev) => ({ ...prev, [pageId]: currentSrc.replace(".webp", ".png") }));
+    } else if (currentSrc.endsWith(".png")) {
+      setPageImageSources((prev) => ({ ...prev, [pageId]: currentSrc.replace(".png", ".jpg") }));
+    } else if (currentSrc.endsWith(".jpg")) {
+      setPageImageSources((prev) => ({ ...prev, [pageId]: currentSrc.replace(".jpg", ".jpeg") }));
+    } else {
+      setImageErrors((prev) => ({ ...prev, [pageId]: true }));
+    }
   };
 
   return (
@@ -145,6 +161,7 @@ export default function MagazineViewer({ onOpenSecretNote }: MagazineViewerProps
           >
             {magazinePages.map((page, index) => {
               const hasError = imageErrors[page.id];
+              const currentSrc = pageImageSources[page.id] || page.image;
 
               return (
                 <div
@@ -154,20 +171,20 @@ export default function MagazineViewer({ onOpenSecretNote }: MagazineViewerProps
                   {!hasError ? (
                     <div className="relative w-full h-full group">
                       <Image
-                        src={page.image}
+                        src={currentSrc}
                         alt={page.alt}
                         fill
                         priority={index <= 2}
                         sizes="(max-width: 768px) 340px, 450px"
                         className="object-contain w-full h-full"
-                        onError={() => handleImageError(page.id)}
+                        onError={() => handlePageImageError(page.id)}
                       />
 
                       {/* Zoom Trigger Button on Page Hover */}
                       <button
                         onClick={(e) => {
                           e.stopPropagation();
-                          setZoomPage(page.image);
+                          setZoomPage(currentSrc);
                         }}
                         className="absolute top-3 right-3 opacity-0 group-hover:opacity-100 transition-opacity bg-black/60 backdrop-blur-md text-white p-2 rounded-full hover:bg-black"
                         title="Zoom Page"
@@ -189,7 +206,7 @@ export default function MagazineViewer({ onOpenSecretNote }: MagazineViewerProps
                       )}
                     </div>
                   ) : (
-                    /* Fallback Canva Visual Renderer if exported WebP is pending */
+                    /* Fallback Canva Visual Renderer if exported image is pending */
                     <div className="w-full h-full p-8 flex flex-col justify-between font-serif-editorial bg-[#FAF8F5]">
                       <div className="border-b border-black/15 pb-4">
                         <span className="text-xs uppercase tracking-widest font-sans text-black/50">

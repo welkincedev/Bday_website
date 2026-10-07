@@ -8,8 +8,8 @@
   }
   
   body {
-    background-color: #0A0A0B;
-    color: #E5E3DF;
+    background-color: #0C0B0E;
+    color: #E8E5DF;
     font-family: var(--font-sans);
   }
 }
@@ -22,25 +22,33 @@
   font-family: var(--font-handwriting);
 }
 
+/* Custom Luxury Background Mesh Gradient */
+.bg-editorial-gradient {
+  background: radial-gradient(circle at 50% 0%, rgba(212, 175, 55, 0.08) 0%, rgba(12, 11, 14, 0) 50%),
+              radial-gradient(circle at 100% 50%, rgba(139, 92, 246, 0.04) 0%, rgba(12, 11, 14, 0) 50%),
+              radial-gradient(circle at 0% 80%, rgba(212, 175, 55, 0.05) 0%, rgba(12, 11, 14, 0) 50%),
+              #0C0B0E;
+}
+
 /* Custom Luxury Scrollbar */
 ::-webkit-scrollbar {
   width: 6px;
   height: 6px;
 }
 ::-webkit-scrollbar-track {
-  background: #0A0A0B;
+  background: #0C0B0E;
 }
 ::-webkit-scrollbar-thumb {
-  background: #2A2A2E;
+  background: #2A2832;
   border-radius: 3px;
 }
 ::-webkit-scrollbar-thumb:hover {
-  background: #4A4A50;
+  background: #4A4656;
 }
 
 /* Magazine 3D Page Flip Shadow & Realism */
 .stpageflip-container {
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.7);
+  box-shadow: 0 30px 80px -15px rgba(0, 0, 0, 0.9);
 }
 
 /* Page flip drop shadow effect */
@@ -76,4 +84,14 @@
 
 .border-gold-accent {
   border-color: rgba(212, 175, 55, 0.3);
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  20%, 60% { transform: translateX(-8px); }
+  40%, 80% { transform: translateX(8px); }
+}
+
+.animate-shake {
+  animation: shake 0.4s ease-in-out;
 }

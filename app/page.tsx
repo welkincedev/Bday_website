@@ -26,7 +26,7 @@ export default function Home() {
   };
 
   return (
-    <main className="min-h-screen bg-[#0A0A0B] text-white relative">
+    <main className="min-h-screen bg-editorial-gradient text-white relative">
       {/* Navigation Bar */}
       <Navbar
         isPlayingMusic={isPlayingMusic}

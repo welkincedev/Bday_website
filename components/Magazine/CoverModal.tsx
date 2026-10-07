@@ -13,10 +13,25 @@ interface CoverModalProps {
 }
 
 export default function CoverModal({ isOpen, onOpenMagazine }: CoverModalProps) {
-  const [imageError, setImageError] = useState(false);
   const coverPage = magazinePages[0] || {
     image: "/images/magazine/cover.webp",
     alt: "Magazine Cover",
+  };
+
+  const [currentImageSrc, setCurrentImageSrc] = useState(coverPage.image);
+  const [imageError, setImageError] = useState(false);
+
+  const handleImageError = () => {
+    // If .webp fails, try .png or .jpg fallbacks
+    if (currentImageSrc.endsWith(".webp")) {
+      setCurrentImageSrc(currentImageSrc.replace(".webp", ".png"));
+    } else if (currentImageSrc.endsWith(".png")) {
+      setCurrentImageSrc(currentImageSrc.replace(".png", ".jpg"));
+    } else if (currentImageSrc.endsWith(".jpg")) {
+      setCurrentImageSrc(currentImageSrc.replace(".jpg", ".jpeg"));
+    } else {
+      setImageError(true);
+    }
   };
 
   return (
@@ -62,16 +77,16 @@ export default function CoverModal({ isOpen, onOpenMagazine }: CoverModalProps) 
               <div className="relative w-[280px] sm:w-[340px] md:w-[400px] aspect-[3/4] rounded-lg overflow-hidden border border-white/10 shadow-[0_30px_70px_rgba(0,0,0,0.9)] transition-transform duration-700 group-hover:scale-[1.02]">
                 {!imageError ? (
                   <Image
-                    src={coverPage.image}
+                    src={currentImageSrc}
                     alt={coverPage.alt}
                     fill
                     priority
                     sizes="(max-width: 768px) 340px, 400px"
                     className="object-cover transition-all duration-700 group-hover:brightness-105"
-                    onError={() => setImageError(true)}
+                    onError={handleImageError}
                   />
                 ) : (
-                  /* Elegant Fallback Cover standard layout if WebP image is not placed yet */
+                  /* Elegant Fallback Cover standard layout if image is not placed yet */
                   <div className="w-full h-full bg-[#FAF8F5] text-[#1A1A1A] p-8 flex flex-col justify-between text-left font-serif-editorial">
                     <div className="border-b border-black/20 pb-4">
                       <p className="text-xs uppercase tracking-widest font-sans text-black/60">
