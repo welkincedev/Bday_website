@@ -14,8 +14,16 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
   const audioRef = useRef<HTMLAudioElement | null>(null);
   const [isMuted, setIsMuted] = useState(false);
   const [volume, setVolume] = useState(0.7);
+  // Track if Spotify player iframe has been loaded at least once so it keeps playing in background
+  const [hasActivated, setHasActivated] = useState(false);
 
   const musicType = siteConfig.musicType || "spotify";
+
+  useEffect(() => {
+    if (isPlaying) {
+      setHasActivated(true);
+    }
+  }, [isPlaying]);
 
   useEffect(() => {
     if (musicType === "mp3" && audioRef.current) {
@@ -44,34 +52,34 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
     }
   };
 
-  // 🟢 SPOTIFY PLAYER WIDGET
+  // 🟢 SPOTIFY PLAYER WIDGET WITH BACKGROUND CONTINUOUS PLAYBACK
   if (musicType === "spotify") {
     let embedUrl = siteConfig.spotifyEmbedUrl || "https://open.spotify.com/embed/playlist/1jcx3wCRRTtXmZhSFTtBzV";
 
-    // Ensure embedUrl has autoplay parameter
     if (!embedUrl.includes("autoplay=1")) {
       embedUrl += embedUrl.includes("?") ? "&autoplay=1" : "?autoplay=1";
     }
 
     return (
       <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
-        {/* Expanded Spotify Iframe Widget */}
-        <AnimatePresence>
-          {isPlaying && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="w-[300px] sm:w-[350px] bg-[#121214] border border-[#1DB954]/50 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden"
-            >
+        {/* Persistent Spotify Iframe Container (Keeps iframe mounted so audio never stops) */}
+        {hasActivated && (
+          <div
+            className={`transition-all duration-300 transform ${
+              isPlaying
+                ? "opacity-100 scale-100 pointer-events-auto translate-y-0"
+                : "opacity-0 scale-95 pointer-events-none translate-y-4 h-0 overflow-hidden"
+            }`}
+          >
+            <div className="w-[300px] sm:w-[350px] bg-[#121214] border border-[#1DB954]/50 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden">
               <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/10 mb-2">
                 <span className="text-xs uppercase tracking-widest text-[#1DB954] font-semibold flex items-center gap-1.5 font-sans">
-                  <Music className="w-3.5 h-3.5" /> Spotify Playlist
+                  <Music className="w-3.5 h-3.5" /> Spotify Playlist (Playing)
                 </span>
                 <button
                   onClick={onTogglePlay}
                   className="text-white/60 hover:text-white p-1 rounded-full hover:bg-white/10"
+                  title="Minimize Player"
                 >
                   <X className="w-4 h-4" />
                 </button>
@@ -86,9 +94,9 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
                 loading="eager"
                 className="rounded-xl"
               />
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </div>
+        )}
 
         {/* Floating Toggle Button */}
         <button
@@ -99,8 +107,14 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
               : "bg-[#121214]/95 border-white/15 text-white hover:border-[#1DB954]/50"
           }`}
         >
-          <Music className={`w-3.5 h-3.5 ${isPlaying ? "animate-pulse" : "text-[#1DB954]"}`} />
-          <span>{isPlaying ? "Hide Playlist" : "Play Our Spotify Playlist"}</span>
+          <Music className={`w-3.5 h-3.5 ${isPlaying ? "animate-pulse text-black" : "text-[#1DB954]"}`} />
+          <span>
+            {isPlaying
+              ? "Minimize Player"
+              : hasActivated
+              ? "Show Spotify Playlist"
+              : "Play Our Spotify Playlist"}
+          </span>
         </button>
       </div>
     );
@@ -112,15 +126,15 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
 
     return (
       <div className="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3">
-        <AnimatePresence>
-          {isPlaying && (
-            <motion.div
-              initial={{ opacity: 0, scale: 0.9, y: 20 }}
-              animate={{ opacity: 1, scale: 1, y: 0 }}
-              exit={{ opacity: 0, scale: 0.9, y: 20 }}
-              transition={{ duration: 0.3 }}
-              className="w-[320px] sm:w-[380px] bg-[#121214] border border-red-500/40 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden"
-            >
+        {hasActivated && (
+          <div
+            className={`transition-all duration-300 transform ${
+              isPlaying
+                ? "opacity-100 scale-100 pointer-events-auto translate-y-0"
+                : "opacity-0 scale-95 pointer-events-none translate-y-4 h-0 overflow-hidden"
+            }`}
+          >
+            <div className="w-[320px] sm:w-[380px] bg-[#121214] border border-red-500/40 rounded-2xl p-2 shadow-[0_20px_50px_rgba(0,0,0,0.9)] overflow-hidden">
               <div className="flex items-center justify-between px-3 py-1.5 border-b border-white/10 mb-2">
                 <span className="text-xs uppercase tracking-widest text-red-500 font-semibold flex items-center gap-1.5 font-sans">
                   <Music className="w-3.5 h-3.5" /> YouTube Playlist
@@ -144,9 +158,9 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
                   className="w-full h-full"
                 />
               </div>
-            </motion.div>
-          )}
-        </AnimatePresence>
+            </div>
+          </div>
+        )}
 
         <button
           onClick={onTogglePlay}
@@ -157,7 +171,7 @@ export default function MusicPlayer({ isPlaying, onTogglePlay }: MusicPlayerProp
           }`}
         >
           <Music className={`w-3.5 h-3.5 ${isPlaying ? "animate-pulse" : "text-red-500"}`} />
-          <span>{isPlaying ? "Hide Player" : "Play YouTube Playlist"}</span>
+          <span>{isPlaying ? "Minimize Player" : "Show YouTube Player"}</span>
         </button>
       </div>
     );
